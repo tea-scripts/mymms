@@ -1,4 +1,8 @@
 const Contact = () => {
-  return <h2>Contact</h2>;
+  return (
+    <section className="page contact">
+      <h1>Contact Page</h1>
+    </section>
+  );
 };
 export default Contact;

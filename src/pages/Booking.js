@@ -1,4 +1,8 @@
 const Booking = () => {
-  return <h2>Booking</h2>;
+  return (
+    <section className="page">
+      <h1>Booking Page</h1>
+    </section>
+  );
 };
 export default Booking;

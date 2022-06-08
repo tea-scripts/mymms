@@ -14,6 +14,7 @@ const Sidebar = () => {
 
   return (
     <aside className={`${isSidebarOpen ? 'sidebar show' : 'sidebar'}`}>
+      <div className="overlay" onClick={closeSidebar}></div>
       <div className="sidebar-content">
         <button type="button" className="close-btn" onClick={closeSidebar}>
           <HiOutlineX />

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Footer } from './components';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import { Booking, Contact, Error, Landing, Products, About } from './pages';
@@ -16,6 +17,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
