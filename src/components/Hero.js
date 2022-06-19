@@ -18,11 +18,11 @@ const Hero = () => {
           <span> - Adetola Akinnubi</span>
         </p>
 
-        <Link className="hero-btn btn fancy" to="/booking">
-          <span class="top-key"></span>
-          <span class="text">Book Now</span>
-          <span class="bottom-key-1"></span>
-          <span class="bottom-key-2"></span>
+        <Link className="fancy" to="/booking">
+          <span className="top-key"></span>
+          <span className="text">Book Now</span>
+          <span className="bottom-key-1"></span>
+          <span className="bottom-key-2"></span>
         </Link>
       </div>
       <div className="hero-img">
@@ -37,9 +37,10 @@ const Wrapper = styled.section`
   padding: 2em 1.5em;
   margin: 0 auto;
   min-height: calc(100vh - var(--nav-height));
-  place-items: center;
+  align-items: center;
+  text-align: center;
 
-  .hero-text h1 {
+  h1 {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
@@ -47,12 +48,16 @@ const Wrapper = styled.section`
     span {
       display: block;
     }
+  }
 
-    p {
-      font-family: var(--ff-headingFont);
-      letter-spacing: 1px;
-      line-height: 2;
-      font-size: 1rem;
+  p {
+    font-family: var(--ff-headingFont);
+    letter-spacing: 1.5px;
+    line-height: 2;
+    font-size: 1rem;
+
+    span {
+      display: inline-block;
     }
   }
 
@@ -68,18 +73,19 @@ const Wrapper = styled.section`
   }
 
   /* From uiverse.io */
-  /* .fancy {
+  .fancy {
     background-color: transparent;
-    border: 2px solid #000;
+    border: 2px solid var(--clr-primary);
     border-radius: 0;
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    float: right;
     font-weight: 700;
     letter-spacing: 0.05em;
-    margin: 0;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
     outline: none;
     overflow: visible;
     padding: 1.25em 2em;
@@ -90,13 +96,15 @@ const Wrapper = styled.section`
     transition: all 0.3s ease-in-out;
     user-select: none;
     font-size: 13px;
+    display: block;
+    width: 10.6rem;
   }
 
   .fancy::before {
     content: ' ';
     width: 1.5625rem;
     height: 2px;
-    background: black;
+    background: var(--clr-primary);
     top: 50%;
     left: 1.5em;
     position: absolute;
@@ -114,7 +122,7 @@ const Wrapper = styled.section`
     transition: all 0.3s ease-in-out;
     text-transform: uppercase;
     text-decoration: none;
-    color: black;
+    color: var(--clr-primary);
   }
 
   .fancy .top-key {
@@ -123,7 +131,7 @@ const Wrapper = styled.section`
     top: -2px;
     left: 0.625rem;
     position: absolute;
-    background: #e8e8e8;
+    background: #fffffe;
     transition: width 0.5s ease-out, left 0.3s ease-out;
   }
 
@@ -133,7 +141,7 @@ const Wrapper = styled.section`
     right: 1.875rem;
     bottom: -2px;
     position: absolute;
-    background: #e8e8e8;
+    background: #fffffe;
     transition: width 0.5s ease-out, right 0.3s ease-out;
   }
 
@@ -143,13 +151,14 @@ const Wrapper = styled.section`
     right: 0.625rem;
     bottom: -2px;
     position: absolute;
-    background: #e8e8e8;
+    background: #fffffe;
     transition: width 0.5s ease-out, right 0.3s ease-out;
   }
 
   .fancy:hover {
     color: white;
-    background: black;
+    background: var(--clr-tertiary);
+    border-color: var(--clr-tertiary);
   }
 
   .fancy:hover::before {
@@ -171,22 +180,20 @@ const Wrapper = styled.section`
   .fancy:hover .bottom-key-2 {
     right: 0;
     width: 0;
-  } */
+  }
 
-  .hero-btn {
-    font-size: 1.2rem;
-    padding: 0.4em 1.3em;
-    border-radius: 0.1rem;
-    outline: 3px solid var(--clr-btn);
-    outline-offset: 2px;
-    border: transparent;
-    margin-top: 2em;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
 
-    :hover {
-      background: var(--clr-white);
-      color: var(--clr-primary);
-      outline-color: var(--clr-primary);
-      border: transparent;
+    .hero-img {
+      display: block;
+    }
+
+    .fancy {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 3em;
     }
   }
 

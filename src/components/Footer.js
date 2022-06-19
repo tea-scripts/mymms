@@ -91,6 +91,9 @@ const Wrapper = styled.footer`
   align-items: center;
   width: 100%;
   padding: 1.5em 1em;
+  text-align: center;
+  font-family: var(--ff-headingFont);
+  letter-spacing: 0.7px;
 
   p,
   a {

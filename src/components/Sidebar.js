@@ -71,6 +71,7 @@ const Wrapper = styled.aside`
     position: fixed;
     transform: translateX(200%);
     transition: var(--transition);
+    z-index: 999;
   }
 
   .show {

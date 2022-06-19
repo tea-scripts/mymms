@@ -124,10 +124,11 @@ const Navigation = styled.nav`
       font-weight: 500;
       font-size: 1.15rem;
       transition: var(--transition);
-    }
+      font-family: var(--ff-headingFont);
 
-    .nav-links a:hover {
-      color: var(--clr-btn);
+      :hover {
+        color: var(--clr-tertiary);
+      }
     }
 
     .user-links {

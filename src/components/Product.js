@@ -8,7 +8,7 @@ const Product = ({ id, img, title, price }) => {
       <div className="product-container">
         <div className="img-container">
           <img src={img} alt={title} />
-          <Link to={`/products/${id}`} className="link">
+          <Link to={`/shop/${id}`} className="link">
             <FaSearch />
           </Link>
         </div>
