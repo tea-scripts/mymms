@@ -1,4 +1,9 @@
-import { Testimonials, Featured, Hero } from '../components/index';
+import {
+  Testimonials,
+  Featured,
+  Hero,
+  Subscription,
+} from '../components/index';
 
 const Landing = () => {
   return (
@@ -6,6 +11,7 @@ const Landing = () => {
       <Hero />
       <Featured />
       <Testimonials />
+      <Subscription />
     </section>
   );
 };

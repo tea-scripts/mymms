@@ -1,6 +1,8 @@
+import styled from 'styled-components';
+
 const About = () => {
   return (
-    <section className="page about">
+    <Wrapper className="page">
       <div className="img-container">
         <img
           src="https://res.cloudinary.com/teascript/image/upload/v1654710875/MYMMS%20Folder/about-image_mdr0jn.webp"
@@ -33,8 +35,47 @@ const About = () => {
           lifestyle and I am committed to serving you the best way I can.
         </p>
       </div>
-    </section>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.section`
+  display: grid;
+  justify-content: center;
+
+  .img-container {
+    min-height: 500px;
+    width: 350px;
+    justify-self: center;
+  }
+
+  .text-container {
+    max-width: 41.3rem;
+  }
+  .text-container p {
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    text-align: justify;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: auto auto;
+    column-gap: 2rem;
+
+    .img-container {
+      width: 300px;
+      align-self: flex-start;
+    }
+    h2 {
+      margin-top: -0.5rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    column-gap: 5rem;
+    padding: 5em 1em;
+  }
+`;
 
 export default About;
