@@ -88,7 +88,7 @@ const Wrapper = styled.section`
     margin-right: auto;
     outline: none;
     overflow: visible;
-    padding: 1.25em 2em;
+    padding: 1.2em 1.8em;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -97,7 +97,7 @@ const Wrapper = styled.section`
     user-select: none;
     font-size: 13px;
     display: block;
-    width: 10.6rem;
+    width: 10.6rem !important;
   }
 
   .fancy::before {

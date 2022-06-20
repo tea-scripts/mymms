@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Footer } from './components';
+import { Cart, Footer } from './components';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import {
@@ -17,6 +17,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Sidebar />
+      <Cart />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/contact" element={<Contact />} />

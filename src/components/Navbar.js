@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Navbar = () => {
-  const { openSidebar } = useSidebarContext();
+  const { openSidebar, openCart } = useSidebarContext();
 
   return (
     <Navigation>
@@ -54,9 +54,9 @@ const Navbar = () => {
           <span>Login</span> <HiUserAdd />
         </Link>
 
-        <Link to="/cart">
+        <button type="button" onClick={openCart}>
           <span>Cart</span> <HiShoppingCart />
-        </Link>
+        </button>
       </div>
     </Navigation>
   );
@@ -119,7 +119,8 @@ const Navigation = styled.nav`
     }
 
     .nav-links a,
-    .user-links a {
+    .user-links a,
+    .user-links button {
       color: var(--clr-primary);
       font-weight: 500;
       font-size: 1.15rem;
@@ -136,6 +137,14 @@ const Navigation = styled.nav`
       align-items: center;
       justify-content: center;
       column-gap: 1em;
+
+      button {
+        background: none;
+        border: transparent;
+        display: flex;
+        align-items: center;
+        column-gap: 0.3em;
+      }
 
       span {
         display: inline-block;

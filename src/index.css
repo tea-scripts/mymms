@@ -143,3 +143,12 @@ img {
   margin: 0 auto;
   margin-top: -1rem;
 }
+
+.chakra-modal__close-btn {
+  border: transparent;
+  background: transparent;
+  color: var(--clr-tertiary);
+  /* width: 2em;
+  height: 2em; */
+  font-size: 1.2rem !important;
+}

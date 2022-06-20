@@ -3,6 +3,7 @@ import reducer from './reducer';
 
 const initialState = {
   isSidebarOpen: false,
+  isCartOpen: false,
 };
 
 const SidebarContext = React.createContext();
@@ -20,8 +21,20 @@ export const SidebarProvider = ({ children }) => {
     dispatch({ type: 'CLOSE_SIDEBAR' });
   };
 
+  // open cart
+  const openCart = () => {
+    dispatch({ type: 'OPEN_CART' });
+  };
+
+  // close cart
+  const closeCart = () => {
+    dispatch({ type: 'CLOSE_CART' });
+  };
+
   return (
-    <SidebarContext.Provider value={{ ...state, openSidebar, closeSidebar }}>
+    <SidebarContext.Provider
+      value={{ ...state, openSidebar, closeSidebar, openCart, closeCart }}
+    >
       {children}
     </SidebarContext.Provider>
   );
