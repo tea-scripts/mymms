@@ -5,5 +5,15 @@ import Contact from './Contact';
 import Booking from './Booking';
 import About from './About';
 import SingleProduct from './SingleProduct';
+import CartPage from './CartPage';
 
-export { Landing, Contact, Error, Products, Booking, About, SingleProduct };
+export {
+  Landing,
+  Contact,
+  Error,
+  Products,
+  Booking,
+  About,
+  SingleProduct,
+  CartPage,
+};

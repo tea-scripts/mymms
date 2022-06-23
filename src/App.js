@@ -10,6 +10,7 @@ import {
   Products,
   About,
   SingleProduct,
+  CartPage,
 } from './pages';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Products />} />
         <Route path="/shop/:handle" element={<SingleProduct />} />
+        <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/booking" element={<Booking />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />

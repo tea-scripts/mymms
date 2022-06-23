@@ -1,7 +1,7 @@
 const Products = () => {
   return (
     <section className="page products">
-      <h1>Products Page</h1>
+      <h1>Shop Page</h1>
     </section>
   );
 };

@@ -17,9 +17,11 @@
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
     "shopify-buy": "^2.15.1",
     "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,9 +41,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "resolutions": {
-      "nth-check": "^2.0.1"
-    },
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

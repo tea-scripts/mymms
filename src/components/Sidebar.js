@@ -1,135 +1,118 @@
 import {
-  HiOutlineX,
   HiHome,
   HiShoppingBag,
   HiChatAlt2,
   HiInformationCircle,
   HiCalendar,
 } from 'react-icons/hi';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Grid,
+  Flex,
+  Text,
+} from '@chakra-ui/react';
+import { AiFillShop } from 'react-icons/ai';
 import useSidebarContext from '../context/sidebar-context';
 import { Link } from 'react-router-dom';
+import { socialLinks } from '../utils/links';
+import { Link as SocLink } from '@chakra-ui/react';
 import styled from 'styled-components';
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useSidebarContext();
 
   return (
-    <Wrapper>
-      <div className={`${isSidebarOpen ? 'sidebar show' : 'sidebar'}`}>
-        <div className="overlay" onClick={closeSidebar}></div>
-        <div className="sidebar-content">
-          <button type="button" className="close-btn" onClick={closeSidebar}>
-            <HiOutlineX />
-          </button>
-          <ul className="sidebar-links">
-            <li>
-              <Link to="/" onClick={closeSidebar} className="sidebar-link">
+    <Drawer
+      isOpen={isSidebarOpen}
+      placement="right"
+      size="sm"
+      onClose={closeSidebar}
+    >
+      <DrawerOverlay />
+      <DrawerContent>
+        <Grid alignItems="center" gridTemplateColumns={'1fr auto'}>
+          <DrawerCloseButton />
+        </Grid>
+
+        <DrawerBody mt={'4rem'}>
+          <div className="sidebar-content">
+            <SidebarLinks>
+              <Link to="/" onClick={closeSidebar}>
                 <HiHome /> <span>Home</span>
               </Link>
-            </li>
-            <li>
-              <Link to="/about" onClick={closeSidebar} className="sidebar-link">
+
+              <Link to="/about" onClick={closeSidebar}>
                 <HiInformationCircle /> <span>About</span>
               </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                onClick={closeSidebar}
-                className="sidebar-link"
-              >
+
+              <Link to="/contact" onClick={closeSidebar}>
                 <HiChatAlt2 /> <span>Contact</span>
               </Link>
-            </li>
-            <li>
-              <Link
-                to="/booking"
-                onClick={closeSidebar}
-                className="sidebar-link"
-              >
+
+              <Link to="/booking" onClick={closeSidebar}>
                 <HiCalendar /> <span>Book Now</span>
               </Link>
-            </li>
-            <li>
-              <Link to="/shop" onClick={closeSidebar} className="sidebar-link">
-                <HiShoppingBag /> <span>Shop</span>
+
+              <Link to="/shop" onClick={closeSidebar}>
+                <AiFillShop /> <span>Shop</span>
               </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </Wrapper>
+
+              <Link to="/cart" className="btn" onClick={closeSidebar}>
+                <HiShoppingBag />
+                <span> Your Cart</span>
+              </Link>
+            </SidebarLinks>
+          </div>
+        </DrawerBody>
+
+        <DrawerFooter flexDir={'column'}>
+          <Flex columnGap={'1rem'} justifyContent={'center'} width="100%">
+            {socialLinks.map((link, index) => {
+              return (
+                <SocLink
+                  href={link.url}
+                  color={'brand.700'}
+                  fontSize="1.3rem"
+                  key={index}
+                  _hover={{ color: 'brand.500', transform: 'scale(1.5)' }}
+                >
+                  {link.icon}
+                </SocLink>
+              );
+            })}
+          </Flex>
+          <Text>All rights reserved Make Your Money Make Sense.</Text>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-const Wrapper = styled.aside`
-  .sidebar {
-    width: 100%;
-    top: 0;
-    right: 0;
-    height: 100%;
-    position: fixed;
-    transform: translateX(200%);
-    transition: var(--transition);
-    z-index: 999;
-  }
+const SidebarLinks = styled.ul`
+  display: grid;
+  row-gap: 1rem;
 
-  .show {
-    transform: translateX(0);
-  }
-
-  .sidebar-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 350px;
-    height: 100%;
-    background: var(--clr-white);
-    padding: 4em 1em;
-  }
-
-  .overlay {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
-    width: 100%;
-    height: 100%;
-  }
-
-  .close-btn {
-    font-size: 2.3rem;
-    border: transparent;
-    color: var(--clr-tertiary);
-    background: transparent;
-    transition: var(--transition);
-    cursor: pointer;
-    position: absolute;
-    right: 0.47em;
-    top: 0.67em;
-  }
-
-  .nav-toggle:hover,
-  .close-btn:hover {
-    transform: scale(1.2);
-  }
-
-  .sidebar-links {
-    display: grid;
-    row-gap: 1rem;
-    align-content: center;
-    margin-top: 2.5em;
-
-    li a {
-      font-size: 1.3rem;
-      color: var(--clr-primary);
-    }
-  }
-
-  .sidebar-link {
+  a {
+    font-size: 1.3rem;
+    color: var(--clr-primary);
     display: flex;
     align-items: center;
 
     span {
       margin-left: 0.5em;
     }
+  }
+
+  .btn {
+    justify-self: center;
+    color: var(--clr-white);
+    background: var(--clr-tertiary);
+    margin-top: 2em;
   }
 `;
 
