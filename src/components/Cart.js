@@ -16,7 +16,6 @@ import React from 'react';
 import useProductsContext from '../context/products-context';
 import useSidebarContext from '../context/sidebar-context';
 import { MinusIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { isCartOpen, closeCart } = useSidebarContext();
