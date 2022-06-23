@@ -1,8 +1,22 @@
+/* eslint-disable no-unused-vars */
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { products } from '../data';
+import useProductsContext from '../context/products-context';
 import Product from './Product';
 
 const Featured = () => {
+  const {
+    fetchSingleProduct,
+    products,
+    fetchAllProducts,
+    featured_products: featured,
+  } = useProductsContext();
+
+  useEffect(() => {
+    fetchAllProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Wrapper className="half-page">
       <div className="title">
@@ -10,8 +24,8 @@ const Featured = () => {
         <div className="underline"></div>
       </div>
       <div className="featured">
-        {products.map((product) => {
-          return <Product key={product.id} {...product} />;
+        {featured.map((product) => {
+          return <Product key={product.title} {...product} />;
         })}
       </div>
     </Wrapper>

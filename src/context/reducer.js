@@ -15,6 +15,49 @@ const reducer = (state, action) => {
     return { ...state, isCartOpen: false };
   }
 
+  // GET SINGLE PRODUCT
+  if (action.type === 'GET_SINGLE_PRODUCT_BEGIN') {
+    return { ...state, product_loading: true, product_error: false };
+  }
+  if (action.type === 'GET_SINGLE_PRODUCT_SUCCESS') {
+    return { ...state, product_loading: false, product: action.payload };
+  }
+
+  // FETCH ALL PRODUCTS
+  if (action.type === 'SETUP_STORE') {
+    const featured_products = action.payload.filter(
+      (product) =>
+        product.options[2].name === 'Featured' &&
+        product.options[2].values[0].value === 'True'
+    );
+    return { ...state, products: action.payload, featured_products };
+  }
+
+  // FETCH SINGLE PRODUCTS
+  if (action.type === 'GET_PRODUCT') {
+    return { ...state, product: action.payload };
+  }
+
+  // CREATE CHECKOUT
+  if (action.type === 'CREATE_CHECKOUT') {
+    return { ...state, checkout: action.payload };
+  }
+
+  // CREATE CHECKOUT
+  if (action.type === 'SET_CHECKOUT') {
+    return { ...state, checkout: action.payload };
+  }
+
+  // ADD ITEM TO CART
+  if (action.type === 'ADD_ITEM_TO_CHECKOUT') {
+    return { ...state, checkout: action.payload };
+  }
+
+  // REMOVE LINE ITEM
+  if (action.type === 'REMOVE_LINE_ITEM') {
+    return { ...state, checkout: action.payload };
+  }
+
   throw new Error(`No such action : ${action.type}`);
 };
 

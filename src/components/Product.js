@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
-const Product = ({ id, img, title, price }) => {
+const Product = ({ title, variants, images, handle }) => {
   return (
     <Wrapper>
       <div className="product-container">
         <div className="img-container">
-          <img src={img} alt={title} />
-          <Link to={`/shop/${id}`} className="link">
+          <img src={`${images[0].src}`} alt={title} />
+          <Link to={`/shop/${handle}`} className="link">
             <FaSearch />
           </Link>
         </div>
       </div>
       <footer>
         <h4>{title}</h4>
-        <p>${(price / 100).toFixed(2)}</p>
+        <p>${variants[0].price}</p>
       </footer>
     </Wrapper>
   );
@@ -32,7 +32,6 @@ const Wrapper = styled.article`
       width: 100%;
       display: block;
       transition: var(--transition);
-      object-position: bottom;
     }
   }
 

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Cart, Footer } from './components';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -14,7 +14,7 @@ import {
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar />
       <Sidebar />
       <Cart />
@@ -22,13 +22,13 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Products />} />
-        <Route path="/shop/:id" element={<SingleProduct />} />
+        <Route path="/shop/:handle" element={<SingleProduct />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 }
 
