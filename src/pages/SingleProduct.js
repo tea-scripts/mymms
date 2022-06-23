@@ -12,6 +12,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     fetchProductWithHandle(handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle]);
 
   if (!product.title) {
