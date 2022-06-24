@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Navbar = () => {
+  // eslint-disable-next-line no-unused-vars
   const { openSidebar, openCart } = useSidebarContext();
 
   return (
@@ -54,9 +55,9 @@ const Navbar = () => {
           <span>Login</span> <HiUserAdd />
         </Link>
 
-        <button type="button" onClick={openCart}>
+        <Link to="/cart">
           <span>Cart</span> <HiShoppingCart />
-        </button>
+        </Link>
       </div>
     </Navigation>
   );

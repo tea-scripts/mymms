@@ -3,9 +3,10 @@ import { Grid, GridItem, Box, Text } from '@chakra-ui/react';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
 import useProductsContext from '../context/products-context';
+import { useEffect, useState } from 'react';
 
 const CartItem = ({ lineItem }) => {
-  const { removeLineItem } = useProductsContext();
+  const { removeLineItem, toggleItemQty } = useProductsContext();
   const {
     title,
     id,
@@ -16,23 +17,22 @@ const CartItem = ({ lineItem }) => {
     variant: { price },
     variant: { selectedOptions },
   } = lineItem;
+  const [itemQty, setItemQty] = useState(quantity);
 
-  const size = selectedOptions
+  // Color and Size Options
+  const options = selectedOptions
     .map((item) => {
       const { name, value } = item;
       return { name, value };
     })
     .slice(0, 2);
 
-  console.log(lineItem);
+  const { value: colorValue } = options[0];
+  const { value: sizeValue } = options[1];
 
-  const increase = () => {
-    console.log('increase');
-  };
+  const increase = () => {};
 
-  const decrease = () => {
-    console.log('decrease');
-  };
+  const decrease = () => {};
 
   return (
     <Wrapper>
@@ -42,14 +42,16 @@ const CartItem = ({ lineItem }) => {
         gap={'1rem'}
         alignItems="center"
         gridTemplateRows={'75px'}
+        textAlign="left"
+        className="title"
       >
         <img src={img} alt="" />
         <Box>
           <h5>{title}</h5>
           <Text className="color">
-            color: <span style={{ backgroundColor: 'red' }}></span>
+            color: <span>{colorValue}</span>
           </Text>
-          <Text className="size"></Text>
+          <Text className="size">Size: {sizeValue.toLowerCase()}</Text>
           <h5 className="price-small">${price}</h5>
         </Box>
       </Grid>
@@ -63,7 +65,7 @@ const CartItem = ({ lineItem }) => {
         decrease={decrease}
       />
 
-      <h5 className="subtotal">${price}</h5>
+      <h5 className="subtotal">${price * quantity}</h5>
 
       <button
         type="button"
@@ -92,20 +94,15 @@ const Wrapper = styled.article`
 
   h5 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   img {
-    /* height: 100%;
-    width: 100%;
-    object-fit: cover; */
     border-radius: var(--border-radius);
   }
 
   .color {
-    color: var(--clr-grey-5);
     font-size: 0.75rem;
-    letter-spacing: var(--spacing);
     text-transform: capitalize;
     margin-bottom: 0;
     display: flex;
@@ -114,11 +111,19 @@ const Wrapper = styled.article`
 
     span {
       display: inline-block;
-      width: 0.5rem;
-      height: 0.5rem;
-      background: red;
       margin-left: 0.5rem;
-      border-radius: 50%;
+    }
+  }
+
+  .amount-btns {
+    width: 75px;
+    button {
+      width: 1rem;
+      height: 0.5rem;
+      font-size: 0.75rem;
+    }
+    h2 {
+      font-size: 1rem;
     }
   }
 
@@ -146,6 +151,38 @@ const Wrapper = styled.article`
     .price,
     .subtotal {
       display: block;
+    }
+    .subtotal {
+      display: block;
+      margin-bottom: 0;
+      color: var(--clr-grey-5);
+      font-weight: 400;
+      font-size: 1rem;
+    }
+
+    img {
+      height: 100%;
+    }
+
+    .title {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 100px 200px;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .amount-btns {
+      width: 100px;
+      button {
+        width: 1.5rem;
+        height: 1rem;
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   }
 `;

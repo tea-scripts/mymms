@@ -4,18 +4,7 @@ import styled from 'styled-components';
 import { CartContent } from '../components';
 
 const CartPage = () => {
-  const { removeLineItem, checkout } = useProductsContext();
-
-  if (checkout.lineItems.length === 0) {
-    return (
-      <div className="page">
-        <h4>Your cart is empty</h4>
-        <Link to="/shop" className="btn">
-          Fill It
-        </Link>
-      </div>
-    );
-  }
+  const { checkout } = useProductsContext();
 
   return (
     <Wrapper className="page">

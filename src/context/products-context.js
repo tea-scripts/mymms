@@ -71,6 +71,10 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const toggleItemQty = (id, value) => {
+    dispatch({ type: 'TOGGLE_ITEM_QTY', payload: { id, value } });
+  };
+
   const fetchProductWithHandle = async (handle) => {
     try {
       const product = await client.product.fetchByHandle(handle);
@@ -90,6 +94,8 @@ export const ProductsProvider = ({ children }) => {
     }
   }, []);
 
+  // console.log(state.checkout);
+
   return (
     <ProductsContext.Provider
       value={{
@@ -100,6 +106,7 @@ export const ProductsProvider = ({ children }) => {
         removeLineItem,
         addItemToCheckout,
         createCheckout,
+        toggleItemQty,
       }}
     >
       {children}

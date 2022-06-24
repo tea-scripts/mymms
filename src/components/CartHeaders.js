@@ -19,7 +19,7 @@ const CartHeaders = () => {
 const Wrapper = styled.div`
   display: none;
 
-  @media (min-width: 776px) {
+  @media (min-width: 768px) {
     display: block;
     .content {
       display: grid;

@@ -58,6 +58,22 @@ const reducer = (state, action) => {
     return { ...state, checkout: action.payload };
   }
 
+  // TOGGLE CART ITEM QTY
+  if (action.type === 'TOGGLE_ITEM_QTY') {
+    const { id, value } = action.payload;
+    const tempItem = state.checkout.lineItems.map((item) => {
+      console.log(item);
+      if (item.id === id) {
+        if (value === 'inc') {
+          let newQty = item.quantity + 1;
+          return { ...item, quantity: newQty };
+        }
+      }
+      return item;
+    });
+
+    return { ...state, checkout: tempItem };
+  }
   throw new Error(`No such action : ${action.type}`);
 };
 
