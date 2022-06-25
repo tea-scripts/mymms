@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useProductsContext from '../context/products-context';
 import AddItemToCart from '../components/AddItemToCart';
 import ProductImages from '../components/ProductImages';
+import { Link } from 'react-router-dom';
 
 const SingleProduct = () => {
   const { handle } = useParams();
@@ -28,9 +29,11 @@ const SingleProduct = () => {
 
   return (
     <Wrapper className="page">
+      <Link to="/shop" className="btn">
+        back to shop
+      </Link>
       <div className="section-center">
         <ProductImages images={images} />
-        {/* <img src={product.images[0].src} alt="" /> */}
         <InfoWrapper>
           <h2>{title}</h2>
           <h5>${product.variants[0].price}</h5>
@@ -56,6 +59,11 @@ const SingleProduct = () => {
 const Wrapper = styled.main`
   .section-center {
     display: grid;
+  }
+
+  .btn {
+    margin-bottom: 2rem;
+    background-color: var(--clr-primary);
   }
 
   img {

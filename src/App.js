@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Cart, Footer } from './components';
-import Navbar from './components/Navbar';
+import { Footer, Navbar } from './components';
 import Sidebar from './components/Sidebar';
 import {
   Booking,
   Contact,
   Error,
   Landing,
-  Products,
+  Shop,
   About,
   SingleProduct,
   CartPage,
@@ -18,11 +17,10 @@ function App() {
     <Router>
       <Navbar />
       <Sidebar />
-      {/* <Cart /> */}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/shop" element={<Products />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:handle" element={<SingleProduct />} />
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/booking" element={<Booking />} />

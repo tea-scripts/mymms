@@ -4,9 +4,10 @@ import Navbar from './Navbar';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
 import Subscription from './Subscription';
-import Cart from './Cart';
 import CartContent from './CartContent';
-
+import Filters from './Filters';
+import ProductsList from './ProductsList';
+import Sort from './Sort';
 export {
   Navbar,
   Featured,
@@ -14,6 +15,8 @@ export {
   Hero,
   Footer,
   Subscription,
-  Cart,
   CartContent,
+  Filters,
+  ProductsList,
+  Sort,
 };
