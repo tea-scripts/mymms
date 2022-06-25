@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Navbar />
       <Sidebar />
-      <Cart />
+      {/* <Cart /> */}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/contact" element={<Contact />} />

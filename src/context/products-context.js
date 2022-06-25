@@ -75,6 +75,10 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: 'TOGGLE_ITEM_QTY', payload: { id, value } });
   };
 
+  const clearCart = () => {
+    dispatch({ type: 'CLEAR_CART' });
+  };
+
   const fetchProductWithHandle = async (handle) => {
     try {
       const product = await client.product.fetchByHandle(handle);
@@ -107,6 +111,7 @@ export const ProductsProvider = ({ children }) => {
         addItemToCheckout,
         createCheckout,
         toggleItemQty,
+        clearCart,
       }}
     >
       {children}

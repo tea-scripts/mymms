@@ -58,6 +58,11 @@ const reducer = (state, action) => {
     return { ...state, checkout: action.payload };
   }
 
+  // CLEAR CART
+  if (action.type === 'CLEAR_CART') {
+    return { ...state, checkout: {} };
+  }
+
   // TOGGLE CART ITEM QTY
   if (action.type === 'TOGGLE_ITEM_QTY') {
     const { id, value } = action.payload;

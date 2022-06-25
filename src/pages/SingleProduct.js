@@ -2,15 +2,12 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useProductsContext from '../context/products-context';
-import { Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import useSidebarContext from '../context/sidebar-context';
 import AddItemToCart from '../components/AddItemToCart';
+import ProductImages from '../components/ProductImages';
 
 const SingleProduct = () => {
   const { handle } = useParams();
-  const { fetchProductWithHandle, addItemToCheckout, product } =
-    useProductsContext();
+  const { fetchProductWithHandle, product } = useProductsContext();
 
   useEffect(() => {
     fetchProductWithHandle(handle);
@@ -25,21 +22,27 @@ const SingleProduct = () => {
     );
   }
 
-  const { title, description } = product;
+  const { title, descriptionHtml, images } = product;
+
+  // console.log(product);
 
   return (
     <Wrapper className="page">
       <div className="section-center">
-        <img src={product.images[0].src} alt="" />
+        <ProductImages images={images} />
+        {/* <img src={product.images[0].src} alt="" /> */}
         <InfoWrapper>
           <h2>{title}</h2>
           <h5>${product.variants[0].price}</h5>
-          <p className="desc">{description}</p>
-          <p>
+          <div
+            className="desc"
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+          ></div>
+          <p className="stock">
             <span>available:</span>
             {product.availableForSale ? ' in stock' : ' out of stock'}
           </p>
-          <p>
+          <p className="vendor">
             <span>vendor:</span> {product.vendor}
           </p>
           <hr />
@@ -56,10 +59,8 @@ const Wrapper = styled.main`
   }
 
   img {
-    height: 400px;
-    width: 400px;
-    /* align-self: center;
-    display: block; */
+    width: 100%;
+    height: 100%;
   }
 
   @media (min-width: 768px) {
@@ -72,12 +73,24 @@ const Wrapper = styled.main`
 `;
 
 const InfoWrapper = styled.article`
-  p.desc {
+  font-family: var(--bodyFont);
+  color: var(--clr-paragraph);
+
+  .desc {
     text-transform: none;
     display: block;
     font-size: 0.95rem;
     word-spacing: 2px;
     letter-spacing: 0.5px;
+
+    ul {
+      margin-bottom: 1em;
+
+      li {
+        list-style-type: disc;
+        margin-left: 1.2em;
+      }
+    }
   }
   h5 {
     margin: 0;
@@ -87,14 +100,17 @@ const InfoWrapper = styled.article`
   h2 {
     margin: 2rem 0 1rem;
   }
-  p {
+  .stock,
+  .vendor {
     text-transform: capitalize;
     display: grid;
     grid-template-columns: 120px auto;
     font-size: 0.9rem;
+    letter-spacing: 0.5px;
 
     span {
       font-weight: 600;
+      font-family: var(--bodyFont);
     }
   }
 

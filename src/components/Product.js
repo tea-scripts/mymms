@@ -7,7 +7,10 @@ const Product = ({ title, variants, images, handle }) => {
     <Wrapper>
       <div className="product-container">
         <div className="img-container">
-          <img src={`${images[0].src}`} alt={title} />
+          <img
+            src={`${images[0].src} || https://static.wixstatic.com/media/eb650b_07ba4f2ec21a4b389809635ca76b4c68~mv2.jpg/v1/fill/w_550,h_550,al_c,q_85,usm_0.66_1.00_0.01/eb650b_07ba4f2ec21a4b389809635ca76b4c68~mv2.webp`}
+            alt={title}
+          />
           <Link to={`/shop/${handle}`} className="link">
             <FaSearch />
           </Link>

@@ -65,7 +65,7 @@ const CartItem = ({ lineItem }) => {
         decrease={decrease}
       />
 
-      <h5 className="subtotal">${price * quantity}</h5>
+      <h5 className="subtotal">${(price * quantity).toFixed(2)}</h5>
 
       <button
         type="button"
