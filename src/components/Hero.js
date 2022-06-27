@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/hero-img.svg';
 import styled from 'styled-components';
+import { AiFillShop } from 'react-icons/ai';
 
 const Hero = () => {
   return (
@@ -17,13 +18,18 @@ const Hero = () => {
           industry, you’ll receive real solutions and experience true results.{' '}
           <span> - Adetola Akinnubi</span>
         </p>
+        <div className="btn-container">
+          <Link className="fancy" to="/booking">
+            <span className="top-key"></span>
+            <span className="text">Book Now</span>
+            <span className="bottom-key-1"></span>
+            <span className="bottom-key-2"></span>
+          </Link>
 
-        <Link className="fancy" to="/booking">
-          <span className="top-key"></span>
-          <span className="text">Book Now</span>
-          <span className="bottom-key-1"></span>
-          <span className="bottom-key-2"></span>
-        </Link>
+          <Link to="/shop" className="primary-button">
+            <AiFillShop /> Shop Now
+          </Link>
+        </div>
       </div>
       <div className="hero-img">
         <img src={heroImg} alt="" />
@@ -72,38 +78,44 @@ const Wrapper = styled.section`
     transform: rotateY(180deg);
   }
 
+  .btn-container {
+    display: flex;
+    align-items: center;
+    column-gap: 2em;
+    justify-content: center;
+    margin-top: 3em;
+  }
+
   /* From uiverse.io */
   .fancy {
     background-color: transparent;
-    border: 2px solid var(--clr-primary);
+    border: 0.15em solid var(--clr-primary);
     border-radius: 0;
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-top: 2em;
-    margin-left: auto;
-    margin-right: auto;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     outline: none;
     overflow: visible;
-    padding: 1.2em 1.8em;
+    padding: 1.2em 2em;
     position: relative;
     text-align: center;
     text-decoration: none;
     text-transform: none;
-    transition: all 0.3s ease-in-out;
+    transition: var(--transition);
     user-select: none;
     font-size: 13px;
     display: block;
     width: 10.6rem !important;
+    font-family: var(--ff-headingFont);
   }
 
   .fancy::before {
     content: ' ';
-    width: 1.5625rem;
-    height: 2px;
+    width: 1.56rem;
+    height: 0.12em;
     background: var(--clr-primary);
     top: 50%;
     left: 1.5em;
@@ -119,7 +131,7 @@ const Wrapper = styled.section`
     padding-left: 2em;
     display: block;
     text-align: left;
-    transition: all 0.3s ease-in-out;
+    transition: var(--transition);
     text-transform: uppercase;
     text-decoration: none;
     color: var(--clr-primary);
@@ -182,6 +194,34 @@ const Wrapper = styled.section`
     width: 0;
   }
 
+  .primary-button {
+    font-family: var(--ff-headingFont);
+    color: var(--clr-primary);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border: 1px solid transparent;
+    padding: 0.8rem 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %23EF4565 /* fill: %230E1822; */ %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+    background-size: 200%;
+    background-position: 200%;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in-out;
+    transition-property: background-position, border, color;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    column-gap: 0.4em;
+
+    :hover {
+      border: 1px solid var(--clr-tertiary);
+      color: white;
+      background-position: 40%;
+    }
+  }
+
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     text-align: left;
@@ -193,7 +233,10 @@ const Wrapper = styled.section`
     .fancy {
       margin-left: 0;
       margin-right: 0;
-      margin-top: 3em;
+    }
+
+    .btn-container {
+      justify-content: left;
     }
   }
 

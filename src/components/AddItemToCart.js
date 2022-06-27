@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import AmountButtons from './AmountButtons';
 import { FaCheck } from 'react-icons/fa';
 import useProductsContext from '../context/products-context';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Select } from '@chakra-ui/react';
 
 const AddItemToCart = ({ product }) => {
+  const [size, setSize] = useState('');
+  const [variant, setVariant] = useState(0);
+
   const { availableForSale, options } = product;
-  let { name: colorName, values: colorValues } = options[0];
-  let { name: sizeName, values: sizeValues } = options[1];
+  let { values: colorValues } = options[0];
+  let { values: sizeValues } = options[1];
 
   const colorOptions = colorValues.map((item) => {
     return item.value;
@@ -19,9 +22,13 @@ const AddItemToCart = ({ product }) => {
     return item.value;
   });
 
+  // Set Color and Qty
   const [mainColor, setMainColor] = useState(colorOptions[0]);
-  const { addItemToCheckout } = useProductsContext();
   const [itemQty, setItemQty] = useState(1);
+
+  const { addItemToCheckout } = useProductsContext();
+
+  // Quantity Buttons
 
   const increase = () => {
     setItemQty((oldAmount) => {
@@ -42,6 +49,25 @@ const AddItemToCart = ({ product }) => {
       return tempAmount;
     });
   };
+
+  // Fetch All Available variant titles
+
+  const productVariants = product.variants.map((item) => {
+    return item.title;
+  });
+  const variantTtiles = [...productVariants];
+
+  // Set Dynamic variant [Combine selected color and size]
+
+  useEffect(() => {
+    let match = `${mainColor} / ${size} / True`;
+    if (variantTtiles.indexOf(match) !== -1) {
+      setVariant(variantTtiles.indexOf(match));
+    } else {
+      setVariant(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size, mainColor]);
 
   return (
     <Wrapper>
@@ -64,7 +90,12 @@ const AddItemToCart = ({ product }) => {
       </div>
       <div className="sizes">
         <span>sizes : </span>
-        <Select variant="filled" w={'40%'}>
+        <Select
+          variant="filled"
+          w={'40%'}
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+        >
           {sizeOptions.map((size, index) => {
             return (
               <option key={index} value={`${size}`}>
@@ -84,7 +115,7 @@ const AddItemToCart = ({ product }) => {
           to="/cart"
           className="cart-btn"
           onClick={() => {
-            addItemToCheckout(product.variants[0].id, itemQty);
+            addItemToCheckout(product.variants[variant].id, itemQty);
           }}
         >
           Add To Cart
@@ -118,11 +149,9 @@ const Wrapper = styled.article`
     margin-right: 0.5rem;
     border: none;
     cursor: pointer;
-    /* opacity: 0.5; */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 2px solid var(--clr-tertiary); */
     svg {
       font-size: 0.75rem;
       color: var(--clr-tertiary);

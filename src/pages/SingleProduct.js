@@ -1,31 +1,45 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useProductsContext from '../context/products-context';
 import AddItemToCart from '../components/AddItemToCart';
 import ProductImages from '../components/ProductImages';
 import { Link } from 'react-router-dom';
+import { Loading, Error } from '../components';
 
 const SingleProduct = () => {
+  const navigate = useNavigate();
   const { handle } = useParams();
-  const { fetchProductWithHandle, product } = useProductsContext();
+  const {
+    fetchProductWithHandle,
+    product,
+    product_loading: loading,
+    product_error: error,
+  } = useProductsContext();
 
   useEffect(() => {
     fetchProductWithHandle(handle);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle]);
 
-  if (!product.title) {
-    return (
-      <div className="page">
-        <div className="loader" style={{ margin: '0 auto' }}></div>
-      </div>
-    );
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+    // eslint-disable-next-line
+  }, [error]);
+
+  if (error) {
+    return <Error />;
+  }
+
+  if (loading || !product.title) {
+    return <Loading />;
   }
 
   const { title, descriptionHtml, images } = product;
-
-  // console.log(product);
 
   return (
     <Wrapper className="page">
@@ -36,7 +50,7 @@ const SingleProduct = () => {
         <ProductImages images={images} />
         <InfoWrapper>
           <h2>{title}</h2>
-          <h5>${product.variants[0].price}</h5>
+          <h5>${product && product.variants[0].price}</h5>
           <div
             className="desc"
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}

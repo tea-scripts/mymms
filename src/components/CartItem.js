@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Grid, GridItem, Box, Text } from '@chakra-ui/react';
+import { Grid, Box, Text } from '@chakra-ui/react';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
 import useProductsContext from '../context/products-context';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const CartItem = ({ lineItem }) => {
   const { removeLineItem, toggleItemQty } = useProductsContext();
@@ -20,6 +20,7 @@ const CartItem = ({ lineItem }) => {
   const [itemQty, setItemQty] = useState(quantity);
 
   // Color and Size Options
+
   const options = selectedOptions
     .map((item) => {
       const { name, value } = item;
@@ -51,7 +52,7 @@ const CartItem = ({ lineItem }) => {
           <Text className="color">
             color: <span>{colorValue}</span>
           </Text>
-          <Text className="size">Size: {sizeValue.toLowerCase()}</Text>
+          <Text className="size">Size: {sizeValue}</Text>
           <h5 className="price-small">${price}</h5>
         </Box>
       </Grid>

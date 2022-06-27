@@ -24,18 +24,41 @@ const reducer = (state, action) => {
   }
 
   // FETCH ALL PRODUCTS
+  if (action.type === 'SETUP_STORE_BEGIN') {
+    return { ...state, products_loading: true };
+  }
+
+  // SETUP STORE
   if (action.type === 'SETUP_STORE') {
     const featured_products = action.payload.filter(
       (product) =>
         product.options[2].name === 'Featured' &&
         product.options[2].values[0].value === 'True'
     );
-    return { ...state, products: action.payload, featured_products };
+    return {
+      ...state,
+      products: action.payload,
+      featured_products,
+      products_loading: false,
+    };
   }
 
-  // FETCH SINGLE PRODUCTS
+  // SETUP STORE ERROR
+  if (action.type === 'SETUP_STORE_ERROR') {
+    return { ...state, products_loading: false, products_error: true };
+  }
+
+  // FETCH SINGLE PRODUCTS BEGIN
+  if (action.type === 'GET_PRODUCT_BEGIN') {
+    return { ...state, product_loading: true, product_error: false };
+  }
+  // SUCCESS
   if (action.type === 'GET_PRODUCT') {
-    return { ...state, product: action.payload };
+    return { ...state, product_loading: false, product: action.payload };
+  }
+  // ERROR
+  if (action.type === 'GET_PRODUCT_ERROR') {
+    return { ...state, product_loading: false, product_error: true };
   }
 
   // CREATE CHECKOUT
@@ -43,7 +66,7 @@ const reducer = (state, action) => {
     return { ...state, checkout: action.payload };
   }
 
-  // CREATE CHECKOUT
+  // SET CHECKOUT
   if (action.type === 'SET_CHECKOUT') {
     return { ...state, checkout: action.payload };
   }

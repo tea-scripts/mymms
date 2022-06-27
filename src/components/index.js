@@ -8,6 +8,9 @@ import CartContent from './CartContent';
 import Filters from './Filters';
 import ProductsList from './ProductsList';
 import Sort from './Sort';
+import Loading from './Loading';
+import Error from './Error';
+
 export {
   Navbar,
   Featured,
@@ -19,4 +22,6 @@ export {
   Filters,
   ProductsList,
   Sort,
+  Loading,
+  Error,
 };

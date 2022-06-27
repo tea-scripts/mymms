@@ -63,11 +63,12 @@ export const ProductsProvider = ({ children }) => {
   };
 
   const fetchAllProducts = async () => {
+    dispatch({ type: 'SETUP_STORE_BEGIN' });
     try {
       const products = await client.product.fetchAll();
       dispatch({ type: 'SETUP_STORE', payload: products });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'SETUP_STORE_ERROR' });
     }
   };
 
@@ -80,11 +81,12 @@ export const ProductsProvider = ({ children }) => {
   };
 
   const fetchProductWithHandle = async (handle) => {
+    dispatch({ type: 'GET_PRODUCT_BEGIN' });
     try {
       const product = await client.product.fetchByHandle(handle);
       dispatch({ type: 'GET_PRODUCT', payload: product });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'GET_PRODUCT_ERROR' });
     }
   };
 

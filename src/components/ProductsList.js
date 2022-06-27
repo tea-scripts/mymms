@@ -2,9 +2,49 @@ import styled from 'styled-components';
 import useProductsContext from '../context/products-context';
 import Product from './Product';
 import { Box } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Loading, Error } from '../components';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsList = () => {
-  const { products } = useProductsContext();
+  const navigate = useNavigate();
+  const {
+    products,
+    fetchAllProducts,
+    products_loading: loading,
+    products_error: error,
+  } = useProductsContext();
+
+  useEffect(() => {
+    fetchAllProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+    // eslint-disable-next-line
+  }, [error]);
+
+  if (products.length < 1) {
+    return (
+      <h5 style={{ textTransform: 'none' }}>
+        {' '}
+        Sorry, no products matched your search...
+      </h5>
+    );
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <Wrapper>
