@@ -24,7 +24,7 @@ const reviews = [
     id: 1,
     name: 'Kianna',
     image: {
-      src: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
+      // src: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
     },
 
     text: 'Amazing service and great advice for a new business venture! I’ve implemented a few of the steps given by the lovely Tola & I must say she knows her stuff! Spread the word!!',
@@ -36,7 +36,7 @@ const reviews = [
       // src: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883409/person-2_np9x5l.jpg',
     },
 
-    text: 'Excellent service… I would definitely recommend. Tola will hold you accountable as needed when trying to create a budget so that you can grow your income.',
+    text: 'Excellent service. I would definitely recommend. Tola will hold you accountable as needed when trying to create a budget so that you can grow your income.',
   },
   {
     id: 3,

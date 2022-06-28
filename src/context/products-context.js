@@ -54,6 +54,8 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: 'OPEN_CART' });
   };
 
+  const updateSort = (e) => {};
+
   const removeLineItem = async (lineItemIdsToRemove) => {
     const checkout = await client.checkout.removeLineItems(
       checkoutId,
@@ -72,10 +74,6 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  const toggleItemQty = (id, value) => {
-    dispatch({ type: 'TOGGLE_ITEM_QTY', payload: { id, value } });
-  };
-
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
@@ -90,7 +88,7 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  // get single product
+  // get checkout id
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -99,8 +97,6 @@ export const ProductsProvider = ({ children }) => {
       createCheckout();
     }
   }, []);
-
-  // console.log(state.checkout);
 
   return (
     <ProductsContext.Provider
@@ -112,8 +108,8 @@ export const ProductsProvider = ({ children }) => {
         removeLineItem,
         addItemToCheckout,
         createCheckout,
-        toggleItemQty,
         clearCart,
+        updateSort,
       }}
     >
       {children}

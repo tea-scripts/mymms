@@ -3,12 +3,18 @@ import { Divider, Select } from '@chakra-ui/react';
 import useProductsContext from '../context/products-context';
 
 const Sort = () => {
-  const { products } = useProductsContext();
+  const { products, updateSort, sort } = useProductsContext();
   return (
     <Wrapper>
       <p>{products.length} products found</p>
       <Divider />
-      <Select className="sort-input">
+      <Select
+        className="sort-input"
+        name="sort"
+        id="sort"
+        value={sort}
+        onChange={updateSort}
+      >
         <option value="price-lowest">price (lowest)</option>
         <option value="price-highest">price (highest)</option>
         <option value="name-a">name (a - z)</option>

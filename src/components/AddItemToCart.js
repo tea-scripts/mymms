@@ -69,6 +69,8 @@ const AddItemToCart = ({ product }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, mainColor]);
 
+  console.log(product.variants[variant].id);
+
   return (
     <Wrapper>
       <div className="colors">

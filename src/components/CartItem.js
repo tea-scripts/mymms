@@ -3,10 +3,9 @@ import { Grid, Box, Text } from '@chakra-ui/react';
 import AmountButtons from './AmountButtons';
 import { FaTrash } from 'react-icons/fa';
 import useProductsContext from '../context/products-context';
-import { useState } from 'react';
 
 const CartItem = ({ lineItem }) => {
-  const { removeLineItem, toggleItemQty } = useProductsContext();
+  const { removeLineItem, addItemToCheckout } = useProductsContext();
   const {
     title,
     id,
@@ -14,10 +13,9 @@ const CartItem = ({ lineItem }) => {
     variant: {
       image: { src: img },
     },
-    variant: { price },
+    variant: { price, id: variantID },
     variant: { selectedOptions },
   } = lineItem;
-  const [itemQty, setItemQty] = useState(quantity);
 
   // Color and Size Options
 
@@ -31,9 +29,13 @@ const CartItem = ({ lineItem }) => {
   const { value: colorValue } = options[0];
   const { value: sizeValue } = options[1];
 
-  const increase = () => {};
+  const increase = () => {
+    addItemToCheckout(variantID, 1);
+  };
 
-  const decrease = () => {};
+  const decrease = () => {
+    addItemToCheckout(variantID, -1);
+  };
 
   return (
     <Wrapper>
