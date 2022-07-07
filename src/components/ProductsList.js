@@ -3,13 +3,13 @@ import useProductsContext from '../context/products-context';
 import Product from './Product';
 import { Box } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { Loading, Error } from '../components';
+import { Loading } from '../components';
 import { useNavigate } from 'react-router-dom';
 
 const ProductsList = () => {
   const navigate = useNavigate();
   const {
-    products,
+    filtered_products: products,
     fetchAllProducts,
     products_loading: loading,
     products_error: error,
@@ -40,10 +40,6 @@ const ProductsList = () => {
 
   if (loading) {
     return <Loading />;
-  }
-
-  if (error) {
-    return <Error />;
   }
 
   return (

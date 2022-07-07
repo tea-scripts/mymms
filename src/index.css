@@ -184,3 +184,11 @@ img {
   border-top-color: var(--clr-tertiary);
   animation: spinner 0.6s linear infinite;
 }
+
+.disable-btn {
+  opacity: 0.5;
+}
+
+.disable-btn:hover {
+  cursor: crosshair !important;
+}

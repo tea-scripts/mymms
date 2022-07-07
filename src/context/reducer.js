@@ -30,15 +30,9 @@ const reducer = (state, action) => {
 
   // SETUP STORE
   if (action.type === 'SETUP_STORE') {
-    const featured_products = action.payload.filter(
-      (product) =>
-        product.options[2].name === 'Featured' &&
-        product.options[2].values[0].value === 'True'
-    );
     return {
       ...state,
       products: action.payload,
-      featured_products,
       products_loading: false,
     };
   }
@@ -81,11 +75,6 @@ const reducer = (state, action) => {
     return { ...state, checkout: action.payload };
   }
 
-  // CLEAR CART
-  if (action.type === 'CLEAR_CART') {
-    return { ...state, checkout: {} };
-  }
-
   // TOGGLE CART ITEM QTY
   if (action.type === 'TOGGLE_ITEM_QTY') {
     const { id, value } = action.payload;
@@ -102,6 +91,57 @@ const reducer = (state, action) => {
 
     return { ...state, checkout: tempItem };
   }
+
+  // LOAD PRODUCTS FOR FILTER
+
+  if (action.type === 'LOAD_PRODUCTS') {
+    return {
+      ...state,
+      filtered_products: [...action.payload],
+    };
+  }
+
+  // UPDATE SORT
+
+  if (action.type === 'UPDATE_SORT') {
+    return { ...state, sort: action.payload };
+  }
+
+  // SORT PRODUCTS
+
+  if (action.type === 'SORT_PRODUCTS') {
+    const { sort, filtered_products } = state;
+    let tempProducts = [...filtered_products];
+
+    if (tempProducts.length > 0) {
+      if (sort === 'price-lowest') {
+        tempProducts = tempProducts.sort((a, b) => {
+          return Number(a.variants[0].price) - Number(b.variants[0].price);
+        });
+      }
+
+      if (sort === 'price-highest') {
+        tempProducts = tempProducts.sort((a, b) => {
+          return Number(b.variants[0].price) - Number(a.variants[0].price);
+        });
+      }
+
+      if (sort === 'name-a') {
+        tempProducts = tempProducts.sort((a, b) => {
+          return a.title.localeCompare(b.title);
+        });
+      }
+
+      if (sort === 'name-z') {
+        tempProducts = tempProducts.sort((a, b) => {
+          return b.title.localeCompare(a.title);
+        });
+      }
+    }
+
+    return { ...state, filtered_products: tempProducts };
+  }
+
   throw new Error(`No such action : ${action.type}`);
 };
 

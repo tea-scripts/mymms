@@ -5,9 +5,14 @@ import CartItem from './CartItem';
 import { Divider, Flex } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import CartTotals from './CartTotals';
+import Loading from './Loading';
 
 const CartContent = () => {
-  const { checkout, clearCart } = useProductsContext();
+  const { checkout, loading } = useProductsContext();
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className="page">
@@ -25,13 +30,6 @@ const CartContent = () => {
         <Link to="/shop" className="link-btn">
           continue shopping
         </Link>
-        <button
-          type="button"
-          className="link-btn clear-btn"
-          onClick={clearCart}
-        >
-          clear shopping cart
-        </button>
       </Flex>
 
       <CartTotals />
@@ -49,10 +47,6 @@ const Wrapper = styled.section`
     border: transparent;
     border-radius: 5px;
     cursor: pointer;
-  }
-
-  .clear-btn {
-    background: var(--clr-tertiary);
   }
 `;
 
