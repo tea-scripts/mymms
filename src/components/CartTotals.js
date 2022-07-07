@@ -16,10 +16,15 @@ const CartTotals = () => {
             shipping : <span>Will be calculated on checkout</span>
           </p>
           <Divider />
-
-          <a href={checkout?.webUrl} className="btn">
-            proceed to checkout
-          </a>
+          {checkout.lineItems.length === 0 ? (
+            <Link className="btn disabled-btn" _disabled={true} isExternal>
+              proceed to checkout
+            </Link>
+          ) : (
+            <a href={checkout?.webUrl} className="btn">
+              proceed to checkout
+            </a>
+          )}
         </article>
       </div>
     </Wrapper>
@@ -62,6 +67,16 @@ const Wrapper = styled.section`
 
     :hover {
       box-shadow: var(--shadow-4);
+    }
+  }
+
+  .disabled-btn {
+    color: var(--clr-white);
+    cursor: not-allowed;
+    opacity: 0.7;
+
+    :hover {
+      text-decoration: none;
     }
   }
 `;

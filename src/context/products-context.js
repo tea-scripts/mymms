@@ -10,8 +10,19 @@ const initialState = {
   featured_products: [],
   product_loading: false,
   product_error: false,
+  filtered_products: [],
+  sort: 'price-lowest',
   product: {},
   checkout: {},
+  filters: {
+    text: '',
+    company: 'all',
+    category: 'all',
+    color: 'all',
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+  },
 };
 
 const ProductsContext = React.createContext();
@@ -54,8 +65,6 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: 'OPEN_CART' });
   };
 
-  const updateSort = (e) => {};
-
   const removeLineItem = async (lineItemIdsToRemove) => {
     const checkout = await client.checkout.removeLineItems(
       checkoutId,
@@ -69,13 +78,10 @@ export const ProductsProvider = ({ children }) => {
     try {
       const products = await client.product.fetchAll();
       dispatch({ type: 'SETUP_STORE', payload: products });
+      dispatch({ type: 'LOAD_PRODUCTS', payload: products });
     } catch (error) {
       dispatch({ type: 'SETUP_STORE_ERROR' });
     }
-  };
-
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
   };
 
   const fetchProductWithHandle = async (handle) => {
@@ -88,6 +94,30 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const updateSort = (e) => {
+    const value = e.target.value;
+    dispatch({ type: 'UPDATE_SORT', payload: value });
+  };
+
+  const updateFilters = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    if (name === 'collection') {
+      value = e.target.textContext;
+    }
+
+    if (name === 'color') {
+      value = e.target.dataset.color;
+    }
+
+    if (name === 'price') {
+      value = Number(value);
+    }
+
+    dispatch({ type: 'UPDATE_FILTERS', payload: { name, value } });
+  };
+
   // get checkout id
 
   useEffect(() => {
@@ -97,6 +127,12 @@ export const ProductsProvider = ({ children }) => {
       createCheckout();
     }
   }, []);
+
+  useEffect(() => {
+    dispatch({ type: 'SORT_PRODUCTS' });
+
+    // Do something with the products
+  }, [state.products, state.sort]);
 
   return (
     <ProductsContext.Provider
@@ -108,8 +144,8 @@ export const ProductsProvider = ({ children }) => {
         removeLineItem,
         addItemToCheckout,
         createCheckout,
-        clearCart,
         updateSort,
+        updateFilters,
       }}
     >
       {children}

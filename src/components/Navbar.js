@@ -3,6 +3,7 @@ import logo from '../assets/images/logo.svg';
 import useSidebarContext from '../context/sidebar-context';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { links } from '../data';
 
 const Navbar = () => {
   // eslint-disable-next-line no-unused-vars
@@ -23,31 +24,13 @@ const Navbar = () => {
 
       {/* nav links */}
       <ul className="nav-links">
-        <li>
-          <Link to="/" className="sidebar-link">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" className="sidebar-link">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className="sidebar-link">
-            Contact
-          </Link>
-        </li>
-        <li>
-          <Link to="/booking" className="sidebar-link">
-            Book Now
-          </Link>
-        </li>
-        <li>
-          <Link to="/shop" className="sidebar-link">
-            Shop
-          </Link>
-        </li>
+        {links.map((link, index) => {
+          return (
+            <li key={index}>
+              <Link to={link.url}>{link.text}</Link>
+            </li>
+          );
+        })}
       </ul>
 
       <div className="user-links">
@@ -127,6 +110,7 @@ const Navigation = styled.nav`
       font-size: 1.15rem;
       transition: var(--transition);
       font-family: var(--ff-headingFont);
+      text-transform: capitalize;
 
       :hover {
         color: var(--clr-tertiary);

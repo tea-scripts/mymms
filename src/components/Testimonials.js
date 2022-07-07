@@ -18,13 +18,13 @@ const Testimonials = () => {
     }
   }, [index, people]);
 
-  // useEffect(() => {
-  //   let slider = setInterval(() => {
-  //     setIndex(index + 1);
-  //   }, 5000);
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setIndex(index + 1);
+    }, 5000);
 
-  //   return () => clearInterval(slider);
-  // }, [index]);
+    return () => clearInterval(slider);
+  }, [index]);
 
   return (
     <Wrapper className="half-page">

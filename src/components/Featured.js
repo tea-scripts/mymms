@@ -1,19 +1,14 @@
-/* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import useProductsContext from '../context/products-context';
 import Product from './Product';
 
 const Featured = () => {
-  const {
-    fetchSingleProduct,
-    products,
-    fetchAllProducts,
-    featured_products: featured,
-  } = useProductsContext();
+  const { products, fetchAllProducts } = useProductsContext();
 
   useEffect(() => {
     fetchAllProducts();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -24,9 +19,11 @@ const Featured = () => {
         <div className="underline"></div>
       </div>
       <div className="featured">
-        {featured.map((product) => {
-          return <Product key={product.title} {...product} />;
-        })}
+        {products
+          .map((product) => {
+            return <Product key={product.title} {...product} />;
+          })
+          .slice(0, 3)}
       </div>
     </Wrapper>
   );

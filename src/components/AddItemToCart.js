@@ -11,8 +11,11 @@ const AddItemToCart = ({ product }) => {
   const [variant, setVariant] = useState(0);
 
   const { availableForSale, options } = product;
+
   let { values: colorValues } = options[0];
   let { values: sizeValues } = options[1];
+
+  console.log(options);
 
   const colorOptions = colorValues.map((item) => {
     return item.value;
@@ -60,7 +63,7 @@ const AddItemToCart = ({ product }) => {
   // Set Dynamic variant [Combine selected color and size]
 
   useEffect(() => {
-    let match = `${mainColor} / ${size} / True`;
+    let match = `${mainColor} / ${size}`;
     if (variantTtiles.indexOf(match) !== -1) {
       setVariant(variantTtiles.indexOf(match));
     } else {
@@ -69,7 +72,7 @@ const AddItemToCart = ({ product }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, mainColor]);
 
-  console.log(product.variants[variant].id);
+  // console.log(product.variants[variant].id);
 
   return (
     <Wrapper>

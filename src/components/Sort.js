@@ -3,7 +3,11 @@ import { Divider, Select } from '@chakra-ui/react';
 import useProductsContext from '../context/products-context';
 
 const Sort = () => {
-  const { products, updateSort, sort } = useProductsContext();
+  const {
+    filtered_products: products,
+    updateSort,
+    sort,
+  } = useProductsContext();
   return (
     <Wrapper>
       <p>{products.length} products found</p>

@@ -49,4 +49,27 @@ const reviews = [
   },
 ];
 
-export { products, reviews };
+const links = [
+  {
+    text: 'home',
+    url: '/',
+  },
+  {
+    text: 'about',
+    url: '/about',
+  },
+  {
+    text: 'contact',
+    url: '/contact',
+  },
+  {
+    text: 'booking',
+    url: '/booking',
+  },
+  {
+    text: 'shop',
+    url: '/shop',
+  },
+];
+
+export { products, reviews, links };
