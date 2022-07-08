@@ -25,6 +25,7 @@ const Wrapper = styled.section`
   @media (min-width: 768px) {
     .products {
       grid-template-columns: 200px 1fr;
+      column-gap: 2rem;
     }
   }
 `;

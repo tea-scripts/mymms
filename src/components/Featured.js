@@ -12,6 +12,8 @@ const Featured = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // console.log(products);
+
   return (
     <Wrapper className="half-page">
       <div className="title">

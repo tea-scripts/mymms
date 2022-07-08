@@ -12,13 +12,14 @@ const initialState = {
   product_error: false,
   filtered_products: [],
   sort: 'price-lowest',
+  all_products: [],
   product: {},
   checkout: {},
   filters: {
     text: '',
-    company: 'all',
-    category: 'all',
-    color: 'all',
+    collections: [],
+    size: [],
+    color: [],
     min_price: 0,
     max_price: 0,
     price: 0,
@@ -46,6 +47,11 @@ export const ProductsProvider = ({ children }) => {
     client.checkout.fetch(checkoutId).then((checkout) => {
       dispatch({ type: 'SET_CHECKOUT', payload: checkout });
     });
+  };
+
+  const fetchCollections = async () => {
+    const collections = await client.collection.fetchAllWithProducts();
+    dispatch({ type: 'GET_COLLECTIONS', payload: collections });
   };
 
   const addItemToCheckout = async (variantId, quantity) => {
@@ -103,8 +109,12 @@ export const ProductsProvider = ({ children }) => {
     let name = e.target.name;
     let value = e.target.value;
 
-    if (name === 'collection') {
-      value = e.target.textContext;
+    if (name === 'collections') {
+      value = e.target;
+    }
+
+    if (name === 'size') {
+      value = e.target.checked;
     }
 
     if (name === 'color') {
@@ -113,6 +123,7 @@ export const ProductsProvider = ({ children }) => {
 
     if (name === 'price') {
       value = Number(value);
+      console.log(value);
     }
 
     dispatch({ type: 'UPDATE_FILTERS', payload: { name, value } });
@@ -129,10 +140,13 @@ export const ProductsProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    dispatch({ type: 'FILTER_PRODUCTS' });
     dispatch({ type: 'SORT_PRODUCTS' });
 
+    fetchCollections();
+
     // Do something with the products
-  }, [state.products, state.sort]);
+  }, [state.products, state.sort, state.filters]);
 
   return (
     <ProductsContext.Provider
@@ -146,6 +160,7 @@ export const ProductsProvider = ({ children }) => {
         createCheckout,
         updateSort,
         updateFilters,
+        fetchCollections,
       }}
     >
       {children}

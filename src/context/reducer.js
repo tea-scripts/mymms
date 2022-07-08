@@ -28,6 +28,17 @@ const reducer = (state, action) => {
     return { ...state, products_loading: true };
   }
 
+  // FETCH COLLECTIONS
+
+  if (action.type === 'GET_COLLECTIONS') {
+    let tempCollections = [...action.payload];
+    tempCollections = tempCollections.map((collection) => collection.title);
+    return {
+      ...state,
+      filters: { ...state.filters, collections: tempCollections },
+    };
+  }
+
   // SETUP STORE
   if (action.type === 'SETUP_STORE') {
     return {
@@ -75,29 +86,18 @@ const reducer = (state, action) => {
     return { ...state, checkout: action.payload };
   }
 
-  // TOGGLE CART ITEM QTY
-  if (action.type === 'TOGGLE_ITEM_QTY') {
-    const { id, value } = action.payload;
-    const tempItem = state.checkout.lineItems.map((item) => {
-      console.log(item);
-      if (item.id === id) {
-        if (value === 'inc') {
-          let newQty = item.quantity + 1;
-          return { ...item, quantity: newQty };
-        }
-      }
-      return item;
-    });
-
-    return { ...state, checkout: tempItem };
-  }
-
   // LOAD PRODUCTS FOR FILTER
 
   if (action.type === 'LOAD_PRODUCTS') {
+    const maxPrice = Math.max(
+      ...action.payload.map((product) => product.variants[0].price)
+    );
+
     return {
       ...state,
       filtered_products: [...action.payload],
+      all_products: [...action.payload],
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
 
@@ -138,6 +138,35 @@ const reducer = (state, action) => {
         });
       }
     }
+    return { ...state, filtered_products: tempProducts };
+  }
+
+  // UPDATE FILTERS
+
+  if (action.type === 'UPDATE_FILTERS') {
+    const { name, value } = action.payload;
+    return { ...state, filters: { ...state.filters, [name]: value } };
+  }
+
+  // FILTER PRODUCTS
+
+  if (action.type === 'FILTER_PRODUCTS') {
+    const { all_products } = state;
+    const { text, collection, size, color, price } = state.filters;
+
+    let tempProducts = [...all_products];
+    // filtering
+    // text
+    if (text) {
+      tempProducts = tempProducts.filter((product) =>
+        product.title.toLowerCase().startsWith(text)
+      );
+    }
+
+    // price
+    tempProducts = tempProducts.filter((product) => {
+      return product.variants[0].price <= price;
+    });
 
     return { ...state, filtered_products: tempProducts };
   }

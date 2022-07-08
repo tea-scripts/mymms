@@ -12,10 +12,13 @@ const AddItemToCart = ({ product }) => {
 
   const { availableForSale, options } = product;
 
-  let { values: colorValues } = options[0];
-  let { values: sizeValues } = options[1];
+  // console.log(options);
+  const [colors, sizes] = options;
 
-  console.log(options);
+  const { values: colorValues } = colors;
+  const { values: sizeValues } = sizes;
+
+  // console.log(options);
 
   const colorOptions = colorValues.map((item) => {
     return item.value;
